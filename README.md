@@ -80,6 +80,18 @@ Levantar el backend
 docker compose up
 ```
 
+También puede ejecutarse en segundo plano:
+
+```bash
+docker compose up -d
+```
+
+Para detener el servicio:
+
+```bash
+docker compose down
+```
+
 El backend estará disponible en:
 ```bash
 http://localhost:8000
