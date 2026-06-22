@@ -2,7 +2,7 @@
 
 Backend desarrollado con **FastAPI** para la gestión, procesamiento y análisis de tickets operativos.
 
-El proyecto permite cargar archivos CSV de tickets, realizar un proceso de limpieza y transformación de datos, almacenar la información procesada y exponer diferentes endpoints para obtener métricas operativas.
+El proyecto permite cargar archivos CSV de tickets, realizar un proceso de limpieza y transformación de datos, almacenar la información procesada y exponer diferentes endpoints para obtener métricas operativas y gerenciales.
 
 ---
 
