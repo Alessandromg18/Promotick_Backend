@@ -8,14 +8,19 @@ import pandas as pd
 
 def load_data():
     if not os.path.exists(PROCESSED_FILE):
-        return pd.DataFrame()
+        return None
 
     try:
         df = pd.read_csv(PROCESSED_FILE)
-        return df if not df.empty else pd.DataFrame()
-    except Exception:
-        return pd.DataFrame()
 
+        if df is None or df.empty:
+            return None
+
+        return df
+
+    except Exception:
+        return None
+    
 def get_operational_metrics():
 
     df = load_data()
