@@ -1,14 +1,30 @@
 import pandas as pd
+import os
 
 PROCESSED_FILE = "processed/tickets_clean.csv"
 
+import os
+import pandas as pd
+
 def load_data():
-    return pd.read_csv(PROCESSED_FILE)
+    if not os.path.exists(PROCESSED_FILE):
+        return pd.DataFrame()
+
+    try:
+        df = pd.read_csv(PROCESSED_FILE)
+        return df if not df.empty else pd.DataFrame()
+    except Exception:
+        return pd.DataFrame()
 
 def get_operational_metrics():
 
     df = load_data()
 
+    if df is None:
+        return {
+            "error": "No dataset loaded. Please upload a CSV first."
+        }
+    
     print(df.columns.tolist())
     
     abiertos = int(df["Open"].sum())
@@ -54,6 +70,11 @@ def tickets_por_prioridad():
 
     df = load_data()
 
+    if df is None:
+        return {
+            "error": "No dataset loaded. Please upload a CSV first."
+        }
+
     return {
         "Low": int(df["Low"].sum()),
         "Medium": int(df["Medium"].sum()),
@@ -65,6 +86,11 @@ def tickets_por_categoria():
 
     df = load_data()
 
+    if df is None:
+        return {
+            "error": "No dataset loaded. Please upload a CSV first."
+        }
+    
     return (
         df["tipo"]
         .value_counts()
@@ -76,6 +102,11 @@ def tickets_por_analista():
 
     df = load_data()
 
+    if df is None:
+        return {
+            "error": "No dataset loaded. Please upload a CSV first."
+        }
+
     return (
         df["agente"]
         .value_counts()
@@ -85,6 +116,11 @@ def tickets_por_analista():
 def tendencia_tickets():
 
     df = load_data()
+
+    if df is None:
+        return {
+            "error": "No dataset loaded. Please upload a CSV first."
+        }
 
     df["tiempo_de_creacion"] = pd.to_datetime(
         df["tiempo_de_creacion"]
@@ -109,6 +145,11 @@ def tendencia_tickets():
 def comparativo_mensual():
 
     df = load_data()
+
+    if df is None:
+        return {
+            "error": "No dataset loaded. Please upload a CSV first."
+        }
 
     df["tiempo_de_creacion"] = pd.to_datetime(
         df["tiempo_de_creacion"]
@@ -162,6 +203,11 @@ def backlog_critico():
 
     df = load_data()
 
+    if df is None:
+        return {
+            "error": "No dataset loaded. Please upload a CSV first."
+        }
+
     return {
         "backlog_critico": int(
             (
@@ -176,6 +222,11 @@ def demanda_por_area():
 
     df = load_data()
 
+    if df is None:
+        return {
+            "error": "No dataset loaded. Please upload a CSV first."
+        }
+
     datos = (
         df["grupo"]
         .value_counts()
@@ -187,6 +238,11 @@ def demanda_por_area():
 def categorias_mayor_incidencia():
 
     df = load_data()
+
+    if df is None:
+        return {
+            "error": "No dataset loaded. Please upload a CSV first."
+        }
 
     datos = (
         df["tipo"]
@@ -200,6 +256,11 @@ def categorias_mayor_incidencia():
 def nivel_saturacion_operativa():
 
     df = load_data()
+
+    if df is None:
+        return {
+            "error": "No dataset loaded. Please upload a CSV first."
+        }
 
     resultado = []
 
@@ -240,6 +301,11 @@ def nivel_saturacion_operativa():
 def saturacion_operativa():
     
     df = load_data()
+
+    if df is None:
+        return {
+            "error": "No dataset loaded. Please upload a CSV first."
+        }
 
     df["tiempo_de_creacion"] = pd.to_datetime(
         df["tiempo_de_creacion"]
@@ -290,6 +356,11 @@ def saturacion_operativa():
 def incidentes_recurrentes():
 
     df = load_data()
+
+    if df is None:
+        return {
+            "error": "No dataset loaded. Please upload a CSV first."
+        }
 
     recurrentes = (
 
